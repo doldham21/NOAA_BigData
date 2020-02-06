@@ -1,9 +1,9 @@
 -- Build database to support querying NOAA GHCN-D
 
--- DROP TABLE STATES;
+-- DROP TABLE STATIONS;
 -- Create table for ghcnd-stations.txt
 CREATE TABLE STATIONS (
-	StationNum INTEGER PRIMARY KEY NOT NULL,
+	StationNum CHAR(2) PRIMARY KEY NOT NULL,
 	StationID CHAR(11) NOT NULL,
 	Latitude NUMERIC NOT NULL,
 	Longtitude NUMERIC NOT NULL,
@@ -19,8 +19,10 @@ CREATE TABLE STATES (
 	StateAbbr CHAR(2) NOT NULL,
 	StateLong VARCHAR(50) NOT NULL);
 
--- Credit for csv conversion for these text files:
--- spatialreasoning.com/wp/20170307_1244_r-reading-filtering-weather-data-from-the-global-historical-climatology-network-ghcn
+-- CSV converstion in Python:
+-- import pandas
+-- stations = pandas.read_fwf('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/text_files/ghcnd-stations.txt',
+--                widths=[11,8,8,6,30,3,3,5])
 
 -- Import data from .csv file for station information, states, countries
 COPY STATIONS FROM '/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-stations.csv' (FORMAT CSV, HEADER, DELIMITER(','));

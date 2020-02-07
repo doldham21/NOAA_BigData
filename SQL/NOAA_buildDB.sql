@@ -35,8 +35,8 @@ CREATE TABLE INVENTORY (
 	Latitude NUMERIC NOT NULL,
 	Longtitude NUMERIC NOT NULL,
 	Element CHAR(4) NOT NULL,
-	BeginDate DATE,
-	EndDate DATE);
+	BeginYear INTEGER,
+	EndYear INTEGER);
 	
 ----------------------------------------------------------
 

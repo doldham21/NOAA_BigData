@@ -28,6 +28,16 @@ CREATE TABLE COUNTRIES (
 	CountryAbbr CHAR(2) NOT NULL,
 	CountryLong VARCHAR(200) NOT NULL);
 	
+-- DROP TABLE INVENTORY;
+CREATE TABLE INVENTORY (
+	InventoryNum INTEGER PRIMARY KEY NOT NULL,
+	StationID CHAR(11) NOT NULL,
+	Latitude NUMERIC NOT NULL,
+	Longtitude NUMERIC NOT NULL,
+	Element CHAR(4) NOT NULL,
+	BeginDate DATE,
+	EndDate DATE);
+	
 ----------------------------------------------------------
 
 -- CSV conversion done in Python
@@ -35,6 +45,7 @@ CREATE TABLE COUNTRIES (
 COPY STATIONS FROM '/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-stations.csv' (FORMAT CSV, DELIMITER(','));
 COPY STATES FROM '/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-states.csv' (FORMAT CSV, DELIMITER(','));
 COPY COUNTRIES FROM '/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-countries.csv' (FORMAT CSV, DELIMITER(','));
+COPY INVENTORY FROM '/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-inventory.csv' (FORMAT CSV, DELIMITER(','));
 
 -- Check data was imported properly
 SELECT * FROM STATIONS

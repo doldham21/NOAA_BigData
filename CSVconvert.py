@@ -34,3 +34,12 @@ countries = pd.read_fwf('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/
 # Convert to csv for PG import
 countries.to_csv('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-countries.csv',
                    sep=',', encoding='utf-8', header=None)
+
+
+# Inventory data
+countries = pd.read_fwf('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/text_files/ghcnd-inventory.txt',
+                widths=[12,9,9,5,5,5], header=None)
+
+# Convert to csv for PG import
+countries.to_csv('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-inventory.csv',
+                   sep=',', encoding='utf-8', header=None)

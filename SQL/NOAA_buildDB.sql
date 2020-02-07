@@ -1,8 +1,10 @@
--- Build database to support querying NOAA GHCN-D
+-- Build database to support importing static/fact files from NOAA GHCN-D
+-- ghcn- "stations", "states", "countries", "inventory" .txt
 
 ----------------------------------------------------------
 
--- Create tables for STATIONS, STATES, COUNTRIES
+-- Create staging tables for STATIONS, STATES, COUNTRIES, INVENTORY
+
 -- DROP TABLE STATIONS;
 CREATE TABLE STATIONS (
 	StationNum VARCHAR(6) PRIMARY KEY NOT NULL,
@@ -40,12 +42,12 @@ CREATE TABLE INVENTORY (
 	
 ----------------------------------------------------------
 
--- CSV conversion done in Python
--- Import data from .csv file for station information, states, countries
+-- CSV conversion done in Python: import data into staging tables using COPY
 COPY STATIONS FROM '/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-stations.csv' (FORMAT CSV, DELIMITER(','));
 COPY STATES FROM '/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-states.csv' (FORMAT CSV, DELIMITER(','));
 COPY COUNTRIES FROM '/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-countries.csv' (FORMAT CSV, DELIMITER(','));
 COPY INVENTORY FROM '/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-inventory.csv' (FORMAT CSV, DELIMITER(','));
+
 
 -- Check data was imported properly
 SELECT * FROM STATIONS

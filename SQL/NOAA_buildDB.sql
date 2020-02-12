@@ -71,7 +71,7 @@ FROM Stations
 JOIN States USING(StateAbbr)
 WHERE Stations.StateAbbr = 'AK';
 
-SELECT StationNum, StationID, StationName, StateAbbr, StateLong, CountryAbbr, CountryLong
+SELECT StationNum, StationID, StationName, StateAbbr, CountryAbbr, CountryLong
 FROM Stations
-JOIN States USING(StateAbbr)
-JOIN Countries USING(CountryAbbr);
+JOIN Countries USING(CountryAbbr)
+ORDER BY StationNum;

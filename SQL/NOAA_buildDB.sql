@@ -20,14 +20,14 @@ CREATE TABLE STATIONS (
 	
 -- DROP TABLE STATES;
 CREATE TABLE STATES (
-	StateNum INTEGER PRIMARY KEY NOT NULL,
-	StateAbbr CHAR(2) NOT NULL,
+	StateNum INTEGER NOT NULL,
+	StateAbbr CHAR(2) PRIMARY KEY NOT NULL,
 	StateLong VARCHAR(50) NOT NULL);
 	
 -- DROP TABLE COUNTRIES;
 CREATE TABLE COUNTRIES (
-	CountryNum INTEGER PRIMARY KEY NOT NULL,
-	CountryAbbr CHAR(2) NOT NULL,
+	CountryNum INTEGER NOT NULL,
+	CountryAbbr CHAR(2) PRIMARY KEY NOT NULL,
 	CountryLong VARCHAR(200) NOT NULL);
 	
 -- DROP TABLE INVENTORY;
@@ -60,10 +60,10 @@ SET CountryAbbr = SUBSTRING(StationID, 1, 2);
 SELECT * FROM STATIONS
 WHERE stationstate = 'FL';
 
-SELECT StationNum, StationID, StationName, Elevation, StationState, StateLong
+SELECT StationNum, StationID, StationName, Elevation, StateAbbr, StateLong
 FROM Stations
-JOIN States ON Stations.StationState = States.StateAbbr
-WHERE Stations.StationState = 'AK';
+JOIN States USING(StateAbbr)
+WHERE Stations.StateAbbr = 'AK';
 
 SELECT StationNum, StationID, StationName, StateAbbr, StateLong, CountryAbbr, CountryLong
 FROM Stations

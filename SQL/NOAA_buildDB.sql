@@ -55,6 +55,12 @@ ADD CountryAbbr CHAR(2);
 UPDATE STATIONS
 SET CountryAbbr = SUBSTRING(StationID, 1, 2);
 
+-- Add Foreign Key to Countries table
+ALTER TABLE STATIONS
+ADD CONSTRAINT fk_countryabbr
+FOREIGN KEY (CountryAbbr)
+REFERENCES COUNTRIES(CountryAbbr);
+
 
 -- Check data was imported properly, try some simple queries/joins
 SELECT * FROM STATIONS

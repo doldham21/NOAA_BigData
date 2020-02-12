@@ -12,7 +12,7 @@ CREATE TABLE STATIONS (
 	Latitude NUMERIC NOT NULL,
 	Longtitude NUMERIC NOT NULL,
 	Elevation NUMERIC NOT NULL,
-	StationState CHAR(2) NULL,
+	StateAbbr CHAR(2) NULL,
 	StationName VARCHAR(30) NOT NULL,
 	GSN_Flag CHAR(3) NULL,
 	HCN_CRN_Flag CHAR(3) NULL,
@@ -48,7 +48,24 @@ COPY STATES FROM '/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_Bi
 COPY COUNTRIES FROM '/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-countries.csv' (FORMAT CSV, DELIMITER(','));
 COPY INVENTORY FROM '/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-inventory.csv' (FORMAT CSV, DELIMITER(','));
 
+-- Add in CountryAbbr based on StationID
+ALTER TABLE STATIONS
+ADD CountryAbbr CHAR(2);
 
--- Check data was imported properly
+UPDATE STATIONS
+SET CountryAbbr = SUBSTRING(StationID, 1, 2);
+
+
+-- Check data was imported properly, try some simple queries/joins
 SELECT * FROM STATIONS
-WHERE stationstate = 'FL'
+WHERE stationstate = 'FL';
+
+SELECT StationNum, StationID, StationName, Elevation, StationState, StateLong
+FROM Stations
+JOIN States ON Stations.StationState = States.StateAbbr
+WHERE Stations.StationState = 'AK';
+
+SELECT StationNum, StationID, StationName, StateAbbr, StateLong, CountryAbbr, CountryLong
+FROM Stations
+JOIN States USING(StateAbbr)
+JOIN Countries USING(CountryAbbr);

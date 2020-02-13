@@ -57,11 +57,16 @@ with open("/Users/mm19864/Documents/BU_assignments/CS779/TermProj/result.txt", "
             outfile.write(infile.read())
 
 # OBS Data - 31 days (if less than read null) of 4 columns each, plus initial 4 info columns
+# Credit: https://stackoverflow.com/questions/45870220
 obs = pd.read_fwf('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/result.txt',
                 widths=[11,4,2,4,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1
                         ,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1
-                        ,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1], header=None)
+                        ,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1],
+                        header=None, chunksize=1000000, iterator=True)
+
+df = pd.concat(obs, ignore_index=True)
 
 # Convert to csv for PG import
-obs.to_csv('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-all.csv',
+df.to_csv('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-all.csv',
                    sep=',', encoding='utf-8', header=None)
+

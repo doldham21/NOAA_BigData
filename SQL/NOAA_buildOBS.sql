@@ -138,9 +138,12 @@ CREATE TABLE OBS (
 COPY OBS FROM '/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-all.csv' (FORMAT CSV, DELIMITER(','));
 
 -- Check import
+SELECT * FROM OBS
+LIMIT 100;
+
+-- Check basic JOIN
 SELECT obsnum, stationid, year, month, element, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, CountryLong 
 FROM OBS
 JOIN Stations USING(StationID)
 JOIN Countries USING(CountryAbbr)
-ORDER BY Year
-LIMIT 100;
+ORDER BY v1 DESC;

@@ -58,20 +58,13 @@ with open("/Users/mm19864/Documents/BU_assignments/CS779/TermProj/result.txt", "
 
 # OBS Data - 31 days (if less than read null) of 4 columns each, plus initial 4 info columns
 # Credit: https://stackoverflow.com/questions/45870220
-obs = pd.read_fwf('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/result.txt',
-                widths=[11,4,2,4,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1
-                        ,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1
-                        ,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1],
-                        header=None, chunksize=100000)
 
-df = pd.concat(obs, ignore_index=True)
-
-# Convert to csv for PG import
+# For each chunk of data, convert to CSV and append into single file 'ghcnd-all.csv'
 for chunk in pd.read_fwf('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/result.txt',
                 widths=[11,4,2,4,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1
                         ,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1
                         ,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1],
-                        header=None, chunksize=100000):
+                        header=None, chunksize=10000):
     
     chunk.to_csv('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-all.csv',
                        mode='a', sep=',', encoding='utf-8', header=None)

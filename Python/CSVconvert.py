@@ -62,7 +62,7 @@ obs = pd.read_fwf('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/result
                 widths=[11,4,2,4,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1
                         ,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1
                         ,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1],
-                        header=None, chunksize=1000000, iterator=True)
+                        header=None, chunksize=100000, iterator=True)
 
 df = pd.concat(obs, ignore_index=True)
 

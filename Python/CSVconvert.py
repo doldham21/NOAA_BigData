@@ -8,6 +8,7 @@ and in entries.
 """
 
 import pandas as pd
+import glob
 
 # Stations data
 stations = pd.read_fwf('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/text_files/ghcnd-stations.txt',
@@ -46,10 +47,21 @@ countries.to_csv('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_Bi
 
 #################################
 
-# OBS Data
-countries = pd.read_fwf('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/ghcnd_all/BRO38262380.dly',
-                widths=[12,9,9,5,5,5], header=None)
+# Concat all .dly files in directory together
+# Credit: https://stackoverflow.com/questions/17749058/
+read_files = glob.glob("/Users/mm19864/Documents/BU_assignments/CS779/TermProj/ghcnd_all/ghcnd_all/*.dly")
+
+with open("/Users/mm19864/Documents/BU_assignments/CS779/TermProj/result.txt", "wb") as outfile:
+    for f in read_files:
+        with open(f, "rb") as infile:
+            outfile.write(infile.read())
+
+# OBS Data - 31 days (if less than read null) of 4 columns each, plus initial 4 info columns
+obs = pd.read_fwf('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/result.txt',
+                widths=[11,4,2,4,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1
+                        ,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1
+                        ,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1], header=None)
 
 # Convert to csv for PG import
-countries.to_csv('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-all.csv',
+obs.to_csv('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-all.csv',
                    sep=',', encoding='utf-8', header=None)

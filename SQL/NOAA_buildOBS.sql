@@ -134,7 +134,13 @@ CREATE TABLE OBS (
 	QF31 CHAR(1),
 	SF31 CHAR(1));
 
+-- Ingest data from Python .csv conversion result
 COPY OBS FROM '/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-all.csv' (FORMAT CSV, DELIMITER(','));
 
 -- Check import
-SELECT * FROM OBS
+SELECT obsnum, stationid, year, month, element, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, CountryLong 
+FROM OBS
+JOIN Stations USING(StationID)
+JOIN Countries USING(CountryAbbr)
+ORDER BY Year
+LIMIT 100;

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Convert raw NOAA .txt files to .csv to easily import into Postgres
+Convert raw NOAA .txt (and .dly) files to .csv to easily import into Postgres
 
 Using fixed-width format with pd.read_fwf because of spaces in delims
 and in entries.

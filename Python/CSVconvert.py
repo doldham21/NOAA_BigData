@@ -43,3 +43,13 @@ countries = pd.read_fwf('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/
 # Convert to csv for PG import
 countries.to_csv('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-inventory.csv',
                    sep=',', encoding='utf-8', header=None)
+
+#################################
+
+# OBS Data
+countries = pd.read_fwf('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/ghcnd_all/BRO38262380.dly',
+                widths=[12,9,9,5,5,5], header=None)
+
+# Convert to csv for PG import
+countries.to_csv('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-all.csv',
+                   sep=',', encoding='utf-8', header=None)

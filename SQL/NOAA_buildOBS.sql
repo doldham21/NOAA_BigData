@@ -141,7 +141,14 @@ COPY OBS FROM 'D:/ghcnd-all-no9999.csv' (FORMAT CSV, DELIMITER(','));
 
 -- Check import
 SELECT * FROM OBS
-LIMIT 100;
+WHERE SF2 = '-9999'
+LIMIT 10;
+
+
+-- ONLY RUN BELOW UDPATES if sed command above was not run, and -9999 vals
+-- still exist in data
+-----------------------------------------------------------------------------
+
 
 -- Update -9999 is NULL
 UPDATE OBS

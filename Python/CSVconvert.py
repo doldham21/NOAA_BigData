@@ -68,4 +68,18 @@ for chunk in pd.read_fwf('D:/result.txt',
     
     chunk.to_csv('D:/ghcnd-all.csv',
                        mode='a', sep=',', encoding='utf-8', header=None)
+    
+    
+#################################
+    
+# Another approach: convert to .csv FIRST, then concat
+
+## Under construction
+for file in read_files:
+    pd.read_fwf(file,
+                widths=[11,4,2,4,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1
+                        ,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1
+                        ,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1],
+                        header=None)
+    file.to_csv('D:/ghcnd_csv', sep=',', encoding='utf-8', header=None)
 

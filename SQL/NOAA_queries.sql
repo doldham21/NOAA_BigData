@@ -7,4 +7,4 @@ JOIN Stations USING(StationID)
 JOIN States USING(StateAbbr)
 JOIN Countries USING(CountryAbbr)
 --WHERE Element = 'TMAX' OR Element = 'TMIN'
-ORDER BY obsnum;
+ORDER BY year;

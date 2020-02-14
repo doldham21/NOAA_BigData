@@ -2,7 +2,8 @@
 
 -- Find average MAX TEMP for a certain state depending on month (30 or 31 days - ignoring february for now)
 
-WITH average_CTE AS 
+WITH 
+average_CTE AS 
 (
 
 -- 31 day months
@@ -73,20 +74,25 @@ WHERE Element IN('TMAX')
 
 ORDER BY stationid, year, month
 	
-)
+),
+
 
 -- Note that as of making this script 2020 just started, so only using past data
 
--- Per year averages, all stations in StateAbbr WITH months 1-12
-SELECT year, AVG(tmax_month_avg_c) AS tmax_average_yearly
+permonth_CTE AS
+(
+-- Averages per month
+SELECT month, year, AVG(tmax_month_avg_c) AS tmax_average_monthly
 FROM average_CTE
 WHERE year < 2020
-GROUP BY year
-ORDER BY year;
+GROUP BY month, year
+ORDER BY year, month
+)
 
--- Or switch to per-station averages per year
-SELECT stationid, year, AVG(tmax_month_avg_c) AS tmax_average_yearly
-FROM average_CTE
-WHERE year < 2020
-GROUP BY stationid, year
+-- SELECT * FROM permonth_CTE;
+-- Per year averages, all stations
+SELECT year, AVG(tmax_average_monthly) AS tmax_average_yearly
+FROM permonth_CTE
+WHERE year < 2020 AND year > 1871
+GROUP BY year
 ORDER BY year;

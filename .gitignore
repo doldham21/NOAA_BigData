@@ -1,5 +1,5 @@
 # Large data files
-data/ghcnd-all.csv
+data/ghcnd-all*.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

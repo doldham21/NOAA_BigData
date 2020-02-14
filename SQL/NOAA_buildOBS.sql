@@ -146,4 +146,5 @@ SELECT obsnum, stationid, year, month, element, v1, v2, v3, v4, v5, v6, v7, v8, 
 FROM OBS
 JOIN Stations USING(StationID)
 JOIN Countries USING(CountryAbbr)
-ORDER BY v1 DESC;
+WHERE Element = 'TMAX' OR Element = 'TMIN'
+ORDER BY v2 DESC;

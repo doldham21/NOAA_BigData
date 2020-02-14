@@ -45,7 +45,7 @@ CREATE TABLE INVENTORY (
 -- CSV conversion done in Python: import data into staging tables using COPY
 COPY STATIONS FROM 'C:/Users/dell/Documents/GitHub/NOAA_BigData/data/ghcnd-stations.csv' (FORMAT CSV, DELIMITER(','));
 COPY STATES FROM 'C:/Users/dell/Documents/GitHub/NOAA_BigData/data/ghcnd-states.csv' (FORMAT CSV, DELIMITER(','));
-COPY COUNTRIES FROM '/C:/Users/dell/Documents/GitHub/NOAA_BigData/data/ghcnd-countries.csv' (FORMAT CSV, DELIMITER(','));
+COPY COUNTRIES FROM 'C:/Users/dell/Documents/GitHub/NOAA_BigData/data/ghcnd-countries.csv' (FORMAT CSV, DELIMITER(','));
 COPY INVENTORY FROM 'C:/Users/dell/Documents/GitHub/NOAA_BigData/data/ghcnd-inventory.csv' (FORMAT CSV, DELIMITER(','));
 
 -- Add in CountryAbbr based on StationID

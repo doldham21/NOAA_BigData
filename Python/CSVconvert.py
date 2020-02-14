@@ -49,9 +49,9 @@ countries.to_csv('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_Bi
 
 # Concat all .dly files in directory together
 # Credit: https://stackoverflow.com/questions/17749058/
-read_files = glob.glob("/Users/mm19864/Documents/BU_assignments/CS779/TermProj/ghcnd_all/ghcnd_all/*.dly")
+read_files = glob.glob("C:/Users/dell/Documents/ghcnd_all/ghcnd_all/*.dly")
 
-with open("/Users/mm19864/Documents/BU_assignments/CS779/TermProj/result.txt", "wb") as outfile:
+with open("C:/Users/dell/Documents/result.txt", "wb") as outfile:
     for f in read_files:
         with open(f, "rb") as infile:
             outfile.write(infile.read())
@@ -60,12 +60,12 @@ with open("/Users/mm19864/Documents/BU_assignments/CS779/TermProj/result.txt", "
 # Credit: https://stackoverflow.com/questions/45870220
 
 # For each chunk of data, convert to CSV and append into single file 'ghcnd-all.csv'
-for chunk in pd.read_fwf('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/result.txt',
+for chunk in pd.read_fwf('C:/Users/dell/Documents/result.txt',
                 widths=[11,4,2,4,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1
                         ,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1
                         ,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1,5,1,1,1],
                         header=None, chunksize=1500):
     
-    chunk.to_csv('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_BigData/data/ghcnd-all.csv',
+    chunk.to_csv('C:/Users/dell/Documents/GitHub/NOAA_BigData/data/ghcnd-all.csv',
                        mode='a', sep=',', encoding='utf-8', header=None)
 

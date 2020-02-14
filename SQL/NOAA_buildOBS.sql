@@ -135,7 +135,9 @@ CREATE TABLE OBS (
 	SF31 CHAR(3));
 
 -- Ingest data from Python .csv conversion result
-COPY OBS FROM 'D:/ghcnd-all.csv' (FORMAT CSV, DELIMITER(','));
+-- Used cygwin to remove "-9999" values that should be NULL
+-- sed -i -e 's/-9999//g' "ghcnd-all-no9999.csv"
+COPY OBS FROM 'D:/ghcnd-all-no9999.csv' (FORMAT CSV, DELIMITER(','));
 
 -- Check import
 SELECT * FROM OBS

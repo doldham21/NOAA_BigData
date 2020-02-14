@@ -49,7 +49,7 @@ countries.to_csv('/Users/mm19864/Documents/BU_assignments/CS779/TermProj/NOAA_Bi
 
 # Concat all .dly files in directory together
 # Credit: https://stackoverflow.com/questions/17749058/
-read_files = glob.glob("D:/ghcnd_all/ghcnd_all/*.dly")
+read_files = glob.glob("D:/ghcnd_all/*.dly")
 
 with open("D:/result.txt", "wb") as outfile:
     for f in read_files:

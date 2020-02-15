@@ -20,7 +20,7 @@ WHERE Element IN('TMAX')
 	AND CountryAbbr = 'US'
 )
 	
-UNION
+UNION ALL
 
 -- 30 day months
 (
@@ -36,7 +36,7 @@ WHERE Element IN('TMAX')
 	AND CountryAbbr = 'US'
 )
 	
-UNION
+UNION ALL
 
 -- February, 28 days, NOT leap years
 (
@@ -56,7 +56,7 @@ WHERE Element IN('TMAX')
 	AND CountryAbbr = 'US'
 )
 	
-UNION
+UNION ALL
 
 -- February, 29 days, leap years
 (
@@ -76,7 +76,7 @@ WHERE Element IN('TMAX')
 	AND CountryAbbr = 'US'
 )
 
-ORDER BY stationid, year, month
+--ORDER BY stationid, year, month
 	
 ),
 
@@ -89,9 +89,8 @@ permonth_CTE AS
 SELECT month, year, COUNT(DISTINCT(month)) AS nummonths, 
 		AVG(tmax_month_avg_c) AS tmax_average_monthly
 FROM average_CTE
-WHERE year < 2020
 GROUP BY month, year
-ORDER BY year, month
+--ORDER BY year, month
 ),
 
 peryear_CTE AS
@@ -102,9 +101,8 @@ peryear_CTE AS
 SELECT year, AVG(tmax_average_monthly) AS tmax_average_yearly, 
 		COUNT(year) AS num_months
 FROM permonth_CTE
-WHERE year < 2020 
 GROUP BY year
-ORDER BY year
+--ORDER BY year
 )
 
 -- Only use data that has a full 12-month average

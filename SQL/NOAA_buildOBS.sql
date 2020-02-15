@@ -139,12 +139,6 @@ CREATE TABLE OBS (
 -- sed -i -e 's/-9999//g' "ghcnd-all-no9999.csv"
 COPY OBS FROM 'D:/ghcnd-all-no9999.csv' (FORMAT CSV, DELIMITER(','));
 
--- Add in CountryAbbr based on StationID
-ALTER TABLE OBS
-ADD CountryAbbr CHAR(2);
-
-UPDATE STATIONS
-SET CountryAbbr = SUBSTRING(StationID, 1, 2);
 
 -- Check import
 SELECT * FROM OBS

@@ -11,6 +11,7 @@ SELECT stationid, stationname, stateabbr, month, year,
 ((v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14+v15+v16+v17+v18+v19+v20+v21+v22+v23+v24+v25+v26+v27+v28+v29+v30+v31)/31) AS month_avg
 FROM obs
 INNER JOIN Stations USING(StationID)
+INNER JOIN Countries USING(CountryAbbr)
 WHERE Element IN('TMIN')
 	AND ((v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14+v15+v16+v17+v18+v19+v20+v21+v22+v23+v24+v25+v26+v27+v28+v29+v30+v31)/31) IS NOT NULL
 	AND month IN(1,3,5,7,8,10,12)
@@ -26,6 +27,7 @@ SELECT stationid, stationname, stateabbr, month, year,
 ((v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14+v15+v16+v17+v18+v19+v20+v21+v22+v23+v24+v25+v26+v27+v28+v29+v30)/30) AS month_avg
 FROM obs
 INNER JOIN Stations USING(StationID)
+INNER JOIN Countries USING(CountryAbbr)
 WHERE Element IN('TMIN')
 	AND ((v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14+v15+v16+v17+v18+v19+v20+v21+v22+v23+v24+v25+v26+v27+v28+v29+v30)/30) IS NOT NULL
 	AND month IN(4,6,9,11)
@@ -41,6 +43,7 @@ SELECT stationid, stationname, stateabbr, month, year,
 ((v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14+v15+v16+v17+v18+v19+v20+v21+v22+v23+v24+v25+v26+v27+v28)/28) AS month_avg
 FROM obs
 INNER JOIN Stations USING(StationID)
+INNER JOIN Countries USING(CountryAbbr)
 WHERE Element IN('TMIN')
 	AND ((v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14+v15+v16+v17+v18+v19+v20+v21+v22+v23+v24+v25+v26+v27+v28)/28) IS NOT NULL
 	AND month IN(2)
@@ -60,6 +63,7 @@ SELECT stationid, stationname, stateabbr, month, year,
 ((v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14+v15+v16+v17+v18+v19+v20+v21+v22+v23+v24+v25+v26+v27+v28)/29) AS month_avg
 FROM obs
 INNER JOIN Stations USING(StationID)
+INNER JOIN Countries USING(CountryAbbr)
 WHERE Element IN('TMIN')
 	AND ((v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14+v15+v16+v17+v18+v19+v20+v21+v22+v23+v24+v25+v26+v27+v28)/29) IS NOT NULL
 	AND month IN(2)
@@ -100,6 +104,5 @@ GROUP BY year
 -- Convert to C, not tenths of C
 SELECT year, (average_yearly/10) AS avg_yearly FROM peryear_CTE
 WHERE num_months = 12
-ORDER BY year;
-
-
+ORDER BY year
+LIMIT 2;
